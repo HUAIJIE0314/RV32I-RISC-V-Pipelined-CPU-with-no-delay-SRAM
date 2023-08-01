@@ -14,6 +14,7 @@
 `include "Stall_Detection.sv"
 `include "Forwarding_Unit.sv"
 `include "Pipe_Reg_SF.sv"
+`include "Pipe_Reg_S.sv"
 `include "Pipe_Reg_F.sv"
 `include "Pipe_Reg.sv"
 
@@ -414,10 +415,16 @@ MUX_4_1 #(.WIDTH(32)) MUX_4_1_MemtoReg (
 
 //**************************** Pipe_Reg *********************************
 
+// Pipe_Reg_SF : pipe register with Stall & Flush
+// Pipe_Reg_S  : pipe register only with Stall
+// Pipe_Reg_F  : pipe register only with Flush
+// Pipe_Reg    : pipe register without Stall & Flush
+
 // IF-ID pipelined register
-Pipe_Reg_SF #(.WIDTH(32)) IF_ID_PC        (.clk_i(clk), .rst_i(rst), .stall_i(stall), .flush_i(1'b0),        .data_i(PC_pres_IF   ), .data_o(PC_pres_ID   ));
-Pipe_Reg_SF #(.WIDTH(32)) IF_ID_PC_plus4  (.clk_i(clk), .rst_i(rst), .stall_i(stall), .flush_i(1'b0),        .data_i(PC_plus4_IF  ), .data_o(PC_plus4_ID  ));// PC_plus4 need to stall, too
 Pipe_Reg_SF #(.WIDTH(32)) IF_ID_Inst      (.clk_i(clk), .rst_i(rst), .stall_i(stall), .flush_i(flush_IF_ID), .data_i(Inst_IF      ), .data_o(Inst_ID      ));
+Pipe_Reg_S  #(.WIDTH(32)) IF_ID_PC        (.clk_i(clk), .rst_i(rst), .stall_i(stall),                        .data_i(PC_pres_IF   ), .data_o(PC_pres_ID   ));
+Pipe_Reg_S  #(.WIDTH(32)) IF_ID_PC_plus4  (.clk_i(clk), .rst_i(rst), .stall_i(stall),                        .data_i(PC_plus4_IF  ), .data_o(PC_plus4_ID  ));// PC_plus4 need to stall, too
+
 
 // ID-EXE pipelined register                                                                                                                        
 Pipe_Reg_F  #(.WIDTH( 7)) ID_EX_funct7    (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(funct7_ID    ), .data_o(funct7_EX    ));
@@ -431,7 +438,7 @@ Pipe_Reg_F  #(.WIDTH( 4)) ID_EX_MemWrite  (.clk_i(clk), .rst_i(rst),            
 Pipe_Reg_F  #(.WIDTH( 2)) ID_EX_MemtoReg  (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(MemtoReg_ID  ), .data_o(MemtoReg_EX  ));
 Pipe_Reg_F  #(.WIDTH( 1)) ID_EX_MemRead   (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(MemRead_ID   ), .data_o(MemRead_EX   ));
 Pipe_Reg_F  #(.WIDTH( 2)) ID_EX_ALUop     (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(ALUop_ID     ), .data_o(ALUop_EX     ));
-Pipe_Reg    #(.WIDTH(32)) ID_EX_CSR_OUT   (.clk_i(clk), .rst_i(rst),                                         .data_i(CSR_OUT_ID   ), .data_o(CSR_OUT_EX   ));
+Pipe_Reg_F  #(.WIDTH(32)) ID_EX_CSR_OUT   (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(CSR_OUT_ID   ), .data_o(CSR_OUT_EX   ));
 Pipe_Reg_F  #(.WIDTH(32)) ID_EX_rs1_data  (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(rs1_data_ID  ), .data_o(rs1_data_EX  ));
 Pipe_Reg_F  #(.WIDTH(32)) ID_EX_rs2_data  (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(rs2_data_ID  ), .data_o(rs2_data_EX  ));
 Pipe_Reg_F  #(.WIDTH(32)) ID_EX_imm_out   (.clk_i(clk), .rst_i(rst),                  .flush_i(flush_ID_EX), .data_i(imm_out_ID   ), .data_o(imm_out_EX   ));

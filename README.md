@@ -1,2 +1,3 @@
-# RV32I-RISC-V-Pipelined-CPU-with-no-delay-SRAM
-RISC-V Pipelined CPU (with no delay SRAM)
+# RISC-V Pipelined CPU (IM/DM are no delay SRAM)
+## Instruction set : RV32I(41 instructions)
+---

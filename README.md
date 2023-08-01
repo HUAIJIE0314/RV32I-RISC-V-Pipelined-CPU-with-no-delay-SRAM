@@ -1,6 +1,7 @@
-# RISC-V Pipelined CPU (IM/DM are no delay SRAM)
+# RISC-V 5-stage Pipelined CPU (IM/DM are no delay SRAM)
 ## Instruction set : RV32I(41 instructions)
 ---
+- Branch calculation is at ID Stage
 ### Simulation ALL Pass
 |  prog#  | cycles |
 |:-------:|:------:|

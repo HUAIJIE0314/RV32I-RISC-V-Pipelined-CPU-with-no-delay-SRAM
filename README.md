@@ -2,6 +2,7 @@
 ## Instruction set : RV32I(41 instructions)
 ---
 ### Simulation ALL Pass
-prog0:6179 cycles
-
-prog4:6010 cycles
+|  prog#  | cycles |
+|:-------:|:------:|
+|  prog0  |  6179  |
+|  prog4  |  6010  |

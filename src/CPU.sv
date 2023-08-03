@@ -255,7 +255,7 @@ Controller controller(
   .rs2Sel_o   (rs2Sel_ID   ),
   .rdPCSel_o  (rdPCSel_ID  ),
   .MemWrite_o (MemWrite_ID ),
-  .MemtoReg_o (MemtoReg_ID),
+  .MemtoReg_o (MemtoReg_ID ),
   .MemRead_o  (MemRead_ID  ),
   .Branch_o   (Branch_ID   ),
   .Jal_o      (Jal_ID      ),
@@ -449,7 +449,7 @@ Pipe_Reg    #(.WIDTH( 3)) EX_ME_funct3    (.clk_i(clk), .rst_i(rst),            
 Pipe_Reg    #(.WIDTH( 5)) EX_ME_rd_addr   (.clk_i(clk), .rst_i(rst),                                         .data_i(rd_addr_EX   ), .data_o(rd_addr_ME   ));
 Pipe_Reg    #(.WIDTH( 1)) EX_ME_RegWrite  (.clk_i(clk), .rst_i(rst),                                         .data_i(RegWrite_EX  ), .data_o(RegWrite_ME  ));
 Pipe_Reg    #(.WIDTH( 4)) EX_ME_MemWrite  (.clk_i(clk), .rst_i(rst),                                         .data_i(MemWrite_EX  ), .data_o(MemWrite_ME  ));
-Pipe_Reg    #(.WIDTH( 2)) EX_ME_MemtoReg  (.clk_i(clk), .rst_i(rst),                                          .data_i(MemtoReg_EX ), .data_o(MemtoReg_ME  ));
+Pipe_Reg    #(.WIDTH( 2)) EX_ME_MemtoReg  (.clk_i(clk), .rst_i(rst),                                         .data_i(MemtoReg_EX  ), .data_o(MemtoReg_ME  ));
 Pipe_Reg    #(.WIDTH( 1)) EX_ME_MemRead   (.clk_i(clk), .rst_i(rst),                                         .data_i(MemRead_EX   ), .data_o(MemRead_ME   ));
 Pipe_Reg    #(.WIDTH(32)) EX_ME_ALUresult (.clk_i(clk), .rst_i(rst),                                         .data_i(ALUresult_EX ), .data_o(ALUresult_ME ));
 Pipe_Reg    #(.WIDTH(32)) EX_ME_CSR_OUT   (.clk_i(clk), .rst_i(rst),                                         .data_i(CSR_OUT_EX   ), .data_o(CSR_OUT_ME   ));
